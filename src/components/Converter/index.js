@@ -10,22 +10,51 @@ class Converter extends Component {
     };
   }
 
-  syncData = (event) => {
+  syncData = event => {
     // console.log(typeof(event.target.name));
-    if( event.target.name === "dolar"){
-      
-        console.log(event.target.value);
-        let temp = event.target.value * 13000;
-        console.log(temp);
-        this.setState({toman : temp,dollar:event.target.value});
-    }else{
-     
+    if (event.target.name === "dolar") {
+      console.log("if running");
       console.log(event.target.name);
-     
-      
-      let temp = parseInt(event.target.value) /13000; 
+      console.log(event.target.value);
+      console.log(typeof event.target.value);
+
+      let temp = event.target.value * 11000;
       console.log(temp);
-      this.setState({toman : temp.toString(),dollar :event.target.value.toString() });
+      console.log(typeof temp);
+
+      this.setState({
+        toman: temp,
+        dollar: event.target.value
+      });
+
+      console.log("toman: " + this.state.toman);
+      console.log("dollar: " + this.state.dollar);
+      console.log("type of toman: " + typeof this.state.toman);
+      console.log("type of dolar: " + typeof this.state.dollar);
+
+      console.log("*************************************");
+    } else {
+      console.log("else running");
+      console.log(event.target.name);
+      console.log(event.target.value);
+      console.log(typeof event.target.value);
+
+      let temp = parseInt(event.target.value) / 11000;
+      console.log(temp);
+      this.setState({
+        toman: temp.toString(),
+        dollar: event.target.value.toString()
+      });
+
+      // let temp = event.target.value / 11000;
+      console.log(temp);
+      console.log(typeof temp);
+      console.log("*************************************");
+
+      this.setState({
+        toman: temp,
+        dollar: event.target.value
+      });
     }
   };
 
@@ -40,7 +69,7 @@ class Converter extends Component {
                 placeholder="dolar"
                 name="dolar"
                 className="form-control"
-                // value={this.state.toman}
+                value={this.state.dollar}
                 onChange={this.syncData}
               ></input>
             </div>
@@ -50,16 +79,13 @@ class Converter extends Component {
                 placeholder="toman"
                 name="toman"
                 className="form-control"
-                value={this.state.dollar}
+                value={this.state.toman}
                 onChange={this.syncData}
-                // onChange="{this.syncData}"
               ></input>
             </div>
           </div>
         </form>
       </div>
-      // <input type="text" onChange={(e)=>{console.log(e.target.value);
-      // }}/>
     );
   }
 }
