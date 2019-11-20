@@ -5,8 +5,7 @@ class Clock extends Component {
     super(props);
 
     this.state = {
-      number: 0,
-      page: 1
+      number: 0
     };
   }
 

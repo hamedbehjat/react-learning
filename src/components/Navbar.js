@@ -14,34 +14,26 @@ class Navbar extends Component {
   changeToClock = () => {
     const { pageStatus, handleStatus } = this.props;
     handleStatus("clock");
-    // this.setState({
-    //   pageStatus: "clock"
-    // });
-    console.log(pageStatus);
+
+    //console.log(pageStatus);
   };
 
   changeToContent = () => {
     const { pageStatus, handleStatus } = this.props;
     handleStatus("content");
-    // this.setState({
-    //   pageStatus: "content"
-    // });
 
-    console.log(pageStatus);
+    //console.log(pageStatus);
   };
 
   changeToConverter = () => {
     const { pageStatus, handleStatus } = this.props;
     handleStatus("converter");
-    // this.setState({
-    //   pageStatus: "content"
-    // });
 
-    console.log(pageStatus);
+    //console.log(pageStatus);
   };
 
   render() {
-    const { pageStatus, handleStatus } = this.props;
+    const { pageStatus } = this.props;
     return (
       <div className="d-flex justify-content-center align-items-center p-5">
         <button
@@ -51,7 +43,7 @@ class Navbar extends Component {
               "btn-outline-primary": pageStatus !== "clock"
             },
             {
-              "btn-primary": pageStatus == "clock"
+              "btn-primary": pageStatus === "clock"
             }
           )}
           onClick={this.changeToClock}
@@ -66,7 +58,7 @@ class Navbar extends Component {
               "btn-outline-primary": pageStatus !== "converter"
             },
             {
-              "btn-primary": pageStatus == "converter"
+              "btn-primary": pageStatus === "converter"
             }
           )}
           onClick={this.changeToConverter}
@@ -81,7 +73,7 @@ class Navbar extends Component {
               "btn-outline-primary": pageStatus !== "content"
             },
             {
-              "btn-primary": pageStatus == "content"
+              "btn-primary": pageStatus === "content"
             }
           )}
           onClick={this.changeToContent}

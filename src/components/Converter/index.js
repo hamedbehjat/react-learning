@@ -14,17 +14,21 @@ class Converter extends Component {
     // console.log(typeof(event.target.name));
     if (event.target.name === "dolar") {
       console.log("if running");
-      console.log(event.target.name);
-      console.log(event.target.value);
-      console.log(typeof event.target.value);
+      console.log(
+        "target name: " +
+          event.target.name +
+          " - target value: " +
+          event.target.value
+      );
+      console.log("type of target value: " + typeof event.target.value);
 
-      let temp = event.target.value * 11000;
+      let temp = parseInt(event.target.value) * 12000;
       console.log(temp);
       console.log(typeof temp);
 
       this.setState({
-        toman: temp,
-        dollar: event.target.value
+        toman: temp.toString(),
+        dollar: event.target.value.toString()
       });
 
       console.log("toman: " + this.state.toman);
@@ -35,26 +39,29 @@ class Converter extends Component {
       console.log("*************************************");
     } else {
       console.log("else running");
-      console.log(event.target.name);
-      console.log(event.target.value);
-      console.log(typeof event.target.value);
+      console.log(
+        "target name: " +
+          event.target.name +
+          " - target value: " +
+          event.target.value
+      );
+      console.log("type of target value: " + typeof event.target.value);
 
-      let temp = parseInt(event.target.value) / 11000;
+      let temp = parseInt(event.target.value) / 12000;
+
       console.log(temp);
       this.setState({
-        toman: temp.toString(),
-        dollar: event.target.value.toString()
+        toman: event.target.value.toString(),
+        dollar: temp.toString()
       });
 
-      // let temp = event.target.value / 11000;
       console.log(temp);
       console.log(typeof temp);
-      console.log("*************************************");
 
-      this.setState({
-        toman: temp,
-        dollar: event.target.value
-      });
+      console.log("type of toman: " + typeof this.state.toman);
+      console.log("type of dolar: " + typeof this.state.dollar);
+
+      console.log("*************************************");
     }
   };
 
@@ -76,7 +83,7 @@ class Converter extends Component {
             <div className="col-6">
               <input
                 type="text"
-                placeholder="toman"
+                placeholder="Toman"
                 name="toman"
                 className="form-control"
                 value={this.state.toman}
