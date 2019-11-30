@@ -30,7 +30,7 @@ class App extends Component {
 
   render() {
     return (
-      <div>
+      <div className="main-content">
         <Navbar
           pageStatus={this.state.pageStatus}
           handleStatus={this.handleStatus}

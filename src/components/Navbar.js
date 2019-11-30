@@ -12,21 +12,21 @@ class Navbar extends Component {
   }
 
   changeToClock = () => {
-    const { pageStatus, handleStatus } = this.props;
+    const { handleStatus } = this.props;
     handleStatus("clock");
 
     //console.log(pageStatus);
   };
 
   changeToContent = () => {
-    const { pageStatus, handleStatus } = this.props;
+    const { handleStatus } = this.props;
     handleStatus("content");
 
     //console.log(pageStatus);
   };
 
   changeToConverter = () => {
-    const { pageStatus, handleStatus } = this.props;
+    const { handleStatus } = this.props;
     handleStatus("converter");
 
     //console.log(pageStatus);

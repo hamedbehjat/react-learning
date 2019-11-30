@@ -6,62 +6,76 @@ class Converter extends Component {
 
     this.state = {
       toman: "",
-      dollar: ""
+      dollar: "",
+      nerkh: "10000"
     };
   }
 
-  syncData = event => {
-    // console.log(typeof(event.target.name));
-    if (event.target.name === "dolar") {
-      console.log("if running");
-      console.log(
-        "target name: " +
-          event.target.name +
-          " - target value: " +
-          event.target.value
-      );
-      console.log("type of target value: " + typeof event.target.value);
+  changeStateDollar = (eventName, eventVal) => {
+    this.setState({ dollar: eventVal }, () => {
+      this.syncData(eventName, eventVal);
+    });
+  };
 
-      let temp = parseInt(event.target.value) * 12000;
-      console.log(temp);
-      console.log(typeof temp);
+  changeStateToman = (eventName, eventVal) => {
+    this.setState({ toman: eventVal }, () => {
+      this.syncData(eventName, eventVal);
+    });
+  };
 
-      this.setState({
-        toman: temp.toString(),
-        dollar: event.target.value.toString()
-      });
+  syncData = (eventName, eventVal) => {
+    if (eventName === "dolar") {
+      if (eventVal === "") {
+        this.setState({
+          toman: "",
+          dollar: ""
+        });
+      } else {
+        let temp = parseInt(eventVal) * parseInt(this.state.nerkh);
+        this.setState(
+          {
+            toman: temp.toString()
+          },
+          () => {
+            console.log("toman: " + this.state.toman);
+            console.log("dollar: " + this.state.dollar);
+            console.log("*************************************");
+          }
+        );
+      }
+    } else if (eventName === "toman") {
+      if (eventVal === "") {
+        this.setState({
+          toman: "",
+          dollar: ""
+        });
+      } else {
+        let temp = parseInt(eventVal) / parseInt(this.state.nerkh);
 
-      console.log("toman: " + this.state.toman);
-      console.log("dollar: " + this.state.dollar);
-      console.log("type of toman: " + typeof this.state.toman);
-      console.log("type of dolar: " + typeof this.state.dollar);
-
-      console.log("*************************************");
+        this.setState(
+          {
+            dollar: temp.toString()
+          },
+          () => {
+            console.log("toman: " + this.state.toman);
+            console.log("dollar: " + this.state.dollar);
+            console.log("*************************************");
+          }
+        );
+      }
     } else {
-      console.log("else running");
-      console.log(
-        "target name: " +
-          event.target.name +
-          " - target value: " +
-          event.target.value
+      let tempDollar = parseInt(this.state.toman) / parseInt(this.state.nerkh);
+
+      this.setState(
+        {
+          dollar: tempDollar.toString()
+        },
+        () => {
+          console.log("toman: " + this.state.toman);
+          console.log("dollar: " + this.state.dollar);
+          console.log("*************************************");
+        }
       );
-      console.log("type of target value: " + typeof event.target.value);
-
-      let temp = parseInt(event.target.value) / 12000;
-
-      console.log(temp);
-      this.setState({
-        toman: event.target.value.toString(),
-        dollar: temp.toString()
-      });
-
-      console.log(temp);
-      console.log(typeof temp);
-
-      console.log("type of toman: " + typeof this.state.toman);
-      console.log("type of dolar: " + typeof this.state.dollar);
-
-      console.log("*************************************");
     }
   };
 
@@ -70,6 +84,23 @@ class Converter extends Component {
       <div className="container">
         <form>
           <div className="form-row">
+            <div className="col-3 my-3">
+              <input
+                type="text"
+                name="nerkh"
+                placeholder="Fee"
+                className="form-control"
+                value={this.state.nerkh}
+                onChange={e => {
+                  const eventName = e.target.name;
+                  this.setState({ nerkh: e.target.value }, () => {
+                    this.syncData(eventName);
+                  });
+                }}
+              ></input>
+            </div>
+          </div>
+          <div className="form-row">
             <div className="col-6">
               <input
                 type="text"
@@ -77,7 +108,11 @@ class Converter extends Component {
                 name="dolar"
                 className="form-control"
                 value={this.state.dollar}
-                onChange={this.syncData}
+                onChange={e => {
+                  const eventName = e.target.name;
+                  const eventVal = e.target.value;
+                  this.changeStateDollar(eventName, eventVal);
+                }}
               ></input>
             </div>
             <div className="col-6">
@@ -87,7 +122,11 @@ class Converter extends Component {
                 name="toman"
                 className="form-control"
                 value={this.state.toman}
-                onChange={this.syncData}
+                onChange={e => {
+                  const eventName = e.target.name;
+                  const eventVal = e.target.value;
+                  this.changeStateToman(eventName, eventVal);
+                }}
               ></input>
             </div>
           </div>
