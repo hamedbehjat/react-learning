@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import axios from "axios";
 
 class Converter extends Component {
   constructor(props) {
@@ -7,9 +8,28 @@ class Converter extends Component {
     this.state = {
       toman: "",
       dollar: "",
-      nerkh: "10000"
+      nerkh: "10000",
+      loading: false
     };
   }
+
+  getNerkhOnline = () => {
+    this.setState({ loading: true });
+
+    console.log(this.state.nerkh);
+
+    axios
+      .get("https://a.anardoni.com/pay/currency")
+      .then(res => {
+        this.setState({ nerkh: res.data.currency });
+        this.setState({ loading: false });
+        console.log(this.state.nerkh);
+      })
+      .catch(err => {
+        console.log(err.response);
+        this.setState({ loading: false });
+      });
+  };
 
   changeStateDollar = (eventName, eventVal) => {
     this.setState({ dollar: eventVal }, () => {
@@ -79,6 +99,11 @@ class Converter extends Component {
     }
   };
 
+  componentDidMount() {
+    setTimeout(this.getNerkhOnline, 5000);
+    // this.getNerkhOnline();
+  }
+
   render() {
     return (
       <div className="container">
@@ -91,6 +116,7 @@ class Converter extends Component {
                 placeholder="Fee"
                 className="form-control"
                 value={this.state.nerkh}
+                disabled={this.state.loading}
                 onChange={e => {
                   const eventName = e.target.name;
                   this.setState({ nerkh: e.target.value }, () => {
