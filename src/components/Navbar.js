@@ -18,6 +18,13 @@ class Navbar extends Component {
     //console.log(pageStatus);
   };
 
+  changeToApplication = () => {
+    const { handleStatus } = this.props;
+    handleStatus("application");
+
+    //console.log(pageStatus);
+  };
+
   changeToContent = () => {
     const { handleStatus } = this.props;
     handleStatus("content");
@@ -36,6 +43,21 @@ class Navbar extends Component {
     const { pageStatus } = this.props;
     return (
       <div className="d-flex justify-content-center align-items-center p-5">
+        <button
+          className={classNames(
+            "btn mx-2",
+            {
+              "btn-outline-primary": pageStatus !== "application"
+            },
+            {
+              "btn-primary": pageStatus === "application"
+            }
+          )}
+          onClick={this.changeToApplication}
+        >
+          Application
+        </button>
+
         <button
           className={classNames(
             "btn mx-2",
